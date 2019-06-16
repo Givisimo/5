@@ -21,16 +21,17 @@ const Notepad = function Notepad(notes = []) {
     notes.splice(noteToDelete, 1);
   };
   this.updateNoteContent = function(id, updatedContent) {
-    for (let i = 0; i < notes.length; i += 1) {
-      if (notes[i].id === id) {
-        return (notes[i] = { ...notes[i], ...updatedContent });
+    const noteFinded = this.findNoteById(id);
+
+    for (let key in noteFinded) {
+      if (Object.keys(updatedContent).includes(key)) {
+        return (noteFinded[key] = updatedContent[key]);
       }
     }
   };
   this.updateNotePriority = function(id, priority) {
-    const priorityValues = Object.values(Notepad.Priority);
     const noteFinded = this.findNoteById(id);
-    return (noteFinded.priority = priorityValues[priority]);
+    return (noteFinded.priority = priority);
   };
   this.filterNotesByQuery = function(query) {
     const filteredNotes = [];
