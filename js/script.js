@@ -22,12 +22,7 @@ const Notepad = function Notepad(notes = []) {
   };
   this.updateNoteContent = function(id, updatedContent) {
     const noteFinded = this.findNoteById(id);
-
-    for (let key in noteFinded) {
-      if (Object.keys(updatedContent).includes(key)) {
-        return (noteFinded[key] = updatedContent[key]);
-      }
-    }
+    return Object.assign(noteFinded, updatedContent);
   };
   this.updateNotePriority = function(id, priority) {
     const noteFinded = this.findNoteById(id);
